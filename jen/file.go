@@ -104,6 +104,10 @@ func (f *File) Anon(paths ...string) {
 	}
 }
 
+func (f *File) AddImport(path, name string) {
+	f.imports[path] = importdef{name: name, alias: true}
+}
+
 // ImportName provides the package name for a path. If specified, the alias will be omitted from the
 // import block. This is optional. If not specified, a sensible package name is used based on the path
 // and this is added as an alias in the import block.
