@@ -1,4 +1,4 @@
-module github.com/dave/jennifer
+module github.com/fitan/jennifer
 
 go 1.19
 
