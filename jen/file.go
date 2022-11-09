@@ -21,6 +21,27 @@ func NewFile(packageName string) *File {
 	}
 }
 
+// MergeFile merge file
+func MergeFile(files ...*File) *File {
+	src := files[0]
+	for _, v := range files[1:] {
+		for importK, importV := range v.imports {
+			src.imports[importK] = importV
+		}
+
+		for hintK, hintV := range v.hints {
+			src.hints[hintK] = hintV
+		}
+
+		src.headers = append(src.headers, v.headers...)
+		src.comments = append(src.comments, v.comments...)
+
+		src.Group.items = append(src.Group.items, v.Group.items...)
+	}
+
+	return src
+}
+
 // NewFilePath creates a new file while specifying the package path - the
 // package name is inferred from the path.
 func NewFilePath(packagePath string) *File {
